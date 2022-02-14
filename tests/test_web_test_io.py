@@ -69,13 +69,6 @@ def test_forward_to_sign_in_page_fill_sign_in_form_check_alert_message(landing_p
     assert sign_in_page.get_alert_message() == "Invalid Email or password."
 
 
-def test_forward_to_sign_in_page_and_reset_password_page(landing_page):
-    sign_in_page = landing_page.select_sign_in_button()
-    sign_in_page.switch_to_second_window()
-    reset_password_page = sign_in_page.click_on_reset_password_link()
-    assert reset_password_page.get_page_header() == "Reset password"
-
-
 def test_return_all_cookies_in_pages_and_check_domain_in_cookies(landing_page):
     cookie_from_first_page = landing_page.local_storage.get_current_page_cookie_from_local_storage()
     sign_in_page = landing_page.select_sign_in_button()
@@ -87,3 +80,10 @@ def test_return_all_cookies_in_pages_and_check_domain_in_cookies(landing_page):
     check_domain = 'test.io', 'cirro.io', 'cirro.io'
     for index in range(len(cookies)):
         assert check_domain[index] in cookies[index]
+
+
+def test_forward_to_sign_in_page_and_reset_password_page(landing_page):
+    sign_in_page = landing_page.select_sign_in_button()
+    sign_in_page.switch_to_second_window()
+    reset_password_page = sign_in_page.click_on_reset_password_link()
+    assert reset_password_page.get_page_header() == "Reset password"
